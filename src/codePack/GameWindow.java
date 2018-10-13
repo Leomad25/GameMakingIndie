@@ -1,6 +1,7 @@
 
 package codePack;
 
+import controls.keyboard;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
@@ -14,6 +15,7 @@ public class GameWindow extends Canvas implements Runnable{
     
     private static JFrame frame;
     private static Thread thread;
+    private static keyboard keyboard;
 
     private static final int window_X = 1280, window_Y = 720;
     private static final String gameName = "GameWindows";
@@ -25,6 +27,9 @@ public class GameWindow extends Canvas implements Runnable{
 
     private GameWindow(){
         setPreferredSize(new Dimension(window_X, window_Y));
+        
+        keyboard = new keyboard();
+        addKeyListener(keyboard);
         
         frame = new JFrame(gameName);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,6 +65,21 @@ public class GameWindow extends Canvas implements Runnable{
     }
     
     private void updateGame(){
+        keyboard.update();
+        
+        if (keyboard.movement_up) {
+            
+        }
+        if (keyboard.movement_down) {
+            
+        }
+        if (keyboard.movement_left) {
+            
+        }
+        if (keyboard.movement_right) {
+            
+        }
+        
         ups++;
     }
     
@@ -78,6 +98,8 @@ public class GameWindow extends Canvas implements Runnable{
         
         double timeLapsed;
         double delta = 0;
+        
+        requestFocus();
         
         while (inWorking) {
             final long loopStart = System.nanoTime();
