@@ -1,8 +1,6 @@
 package source;
 
 
-//Putavida 
-
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
