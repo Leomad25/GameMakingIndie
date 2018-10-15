@@ -1,4 +1,4 @@
-package source;
+package sourceCode;
 
 public class Sprite {
     private final int size_X;
@@ -9,7 +9,15 @@ public class Sprite {
     
     public int[][] pixels;
     private final SpriteSheet sheet;
-
+    
+    
+    // Sprite Collection -------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public static Sprite grass_texture = new Sprite(480, 480, 0, 0, SpriteSheet.grass);
+    
+    //  End of Collection -------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    
     public Sprite(final int Size_X, final int Size_Y, final int Pos_X, final int Pos_Y, final SpriteSheet SpriteSheet) {
         this.size_X = Size_X;
         this.size_Y = Size_Y;

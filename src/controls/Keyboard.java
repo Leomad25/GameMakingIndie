@@ -3,7 +3,7 @@ package controls;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class keyboard implements KeyListener{
+public class Keyboard implements KeyListener{
     private final static int numberKeys = 120;
     private boolean[] keys = new boolean[numberKeys];
     

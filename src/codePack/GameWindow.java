@@ -1,34 +1,46 @@
 
 package codePack;
 
-import controls.keyboard;
+import controls.Keyboard;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
+import sourceCode.Screen;
 
 public class GameWindow extends Canvas implements Runnable{
     
     private static final long serialVersionUID = 1L;
     
-    private static JFrame frame;
-    private static Thread thread;
-    private static keyboard keyboard;
-
-    private static final int window_X = 1280, window_Y = 720;
+    private static final int window_X = 400, window_Y = 300;
     private static final String gameName = "GameWindows";
     
+    private static JFrame frame;
+    private static Thread thread;
+    private static Keyboard keyboard;
+    private static Screen screen;
+
     private static int ups = 0;
     private static int fps = 0;
     
+    private static int x = 0;
+    private static int y = 0;
+    
     private static volatile boolean inWorking = false;
+    
+    private static BufferedImage image = new BufferedImage(window_X, window_Y, BufferedImage.TYPE_INT_RGB);
+    private static int[][] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getBankData();
 
     private GameWindow(){
         setPreferredSize(new Dimension(window_X, window_Y));
         
-        keyboard = new keyboard();
+        screen = new Screen(window_X, window_Y);
+        
+        keyboard = new Keyboard();
         addKeyListener(keyboard);
         
         frame = new JFrame(gameName);
@@ -68,22 +80,42 @@ public class GameWindow extends Canvas implements Runnable{
         keyboard.update();
         
         if (keyboard.movement_up) {
-            
+            y++;
         }
         if (keyboard.movement_down) {
-            
+            y--;
         }
         if (keyboard.movement_left) {
-            
+            x++;
         }
         if (keyboard.movement_right) {
-            
+            x--;
         }
         
         ups++;
     }
     
     private void showGame(){
+        BufferStrategy strategy = getBufferStrategy();
+        
+        if (strategy == null) {
+            createBufferStrategy(3);
+            return;
+        }
+        
+        screen.clear();
+        screen.show(x, y);
+        
+        //POSIBLE FALLO ----------------------------------------------------------------------------------------------------------------------------------
+        System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
+        
+        Graphics g = strategy.getDrawGraphics();
+        
+        g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+        g.dispose();
+        
+        strategy.show();
+        
         fps++;
     }
 

@@ -1,4 +1,4 @@
-package source;
+package sourceCode;
 
 
 import java.awt.image.BufferedImage;
@@ -10,6 +10,14 @@ public class SpriteSheet {
     private final int size_Y;
     //public final int[] pixels;
     public final int[][] pixels;
+    
+    
+    // Sprite sheet Collection --------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    public static SpriteSheet grass = new SpriteSheet("/textures/grass2.png", 480, 480);
+    
+    //  End of Collection -------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
     
     public SpriteSheet(final String Route, final int Size_X, final int Size_Y){
         this.size_X = Size_X;
